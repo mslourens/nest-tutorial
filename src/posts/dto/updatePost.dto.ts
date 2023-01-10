@@ -10,4 +10,7 @@ export default class UpdatePostDto {
   @IsOptional()
   @IsString()
   title: string;
+  @IsOptional()
+  @IsString()
+  category?: string;
 }
