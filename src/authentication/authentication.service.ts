@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcrypt';
 import { PostgresErrorCode } from '../database/postgresErrorCodes.enum';
-import { RegisterDto } from '../users/dto/register.dto';
+import { RegisterDto } from './dto/register.dto';
 import { UsersService } from '../users/users.service';
 import { TokenPayload } from './token-payload.interface';
 
