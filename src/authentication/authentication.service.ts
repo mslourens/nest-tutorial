@@ -52,6 +52,11 @@ export class AuthenticationService {
     }
   }
 
+  getJwtToken(userId: number): string {
+    const payload: TokenPayload = { userId };
+    return this.jwtService.sign(payload);
+  }
+
   getCookieWithJwtToken(userId: number) {
     const payload: TokenPayload = { userId };
     const token = this.jwtService.sign(payload);

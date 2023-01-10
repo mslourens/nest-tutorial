@@ -33,15 +33,12 @@ export class AuthenticationController {
     @Res() response: Response,
   ) {
     const { user } = requestWithUser;
-    const cookie = this.authenticationService.getCookieWithJwtToken(user.id);
-
-    response.setHeader('Set-Cookie', cookie);
-    user.password = undefined;
-    return response.send(user);
+    const token = this.authenticationService.getJwtToken(user.id);
+    response.status(200).json({ user, token });
   }
 
-  @UseGuards(JwtAuthenticationGuard)
   @Post('logout')
+  @UseGuards(JwtAuthenticationGuard)
   async logout(@Res() response: Response) {
     response.setHeader(
       'Set-Cookie',
@@ -50,8 +47,8 @@ export class AuthenticationController {
     return response.sendStatus(200);
   }
 
-  @UseGuards(JwtAuthenticationGuard)
   @Get()
+  @UseGuards(JwtAuthenticationGuard)
   authenticate(@Req() request: RequestWithUser) {
     const { user } = request;
     user.password = undefined;
