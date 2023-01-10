@@ -25,4 +25,15 @@ export class UsersService {
     await this.usersRepository.save(newUser);
     return newUser;
   }
+
+  async getById(id: number): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) {
+      throw new HttpException(
+        'User with this id does not exist',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return user;
+  }
 }
